@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+
+  "name": "Status badge for VSTS builds",
+  "version": "1.0.0",
+  "description": "Sets the status icon as the favicon when you are on a VSTS build page.",
+
+  "content_scripts": [{
+    "js": ["seticon.js"],
+    "matches": ["*://*.visualstudio.com/*"]
+  }]
+}

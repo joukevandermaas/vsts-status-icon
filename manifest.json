@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
 
-  "name": "Status badge for VSTS builds",
-  "version": "1.1.0",
-  "description": "Sets the status icon as the favicon when you are on a VSTS build page.",
+  "name": "Status badge for Azure Devops Pipelines",
+  "version": "1.2.0",
+  "description": "Sets the status icon as the favicon when you are on a Azure Devops Pipelines build or release page.",
 
   "content_scripts": [{
     "js": ["seticon.js"],
-    "matches": ["*://*.visualstudio.com/*"]
+    "matches": ["*://*.visualstudio.com/*", "*://dev.azure.com/*"]
   }]
 }

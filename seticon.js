@@ -26,27 +26,20 @@
     ctx.imageSmoothingEnabled = true;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    let icon = document.querySelector('.result-status i[role="presentation"]');
-    let content = icon.innerText;
+    let icon = document.querySelector('.result-status svg');
+
     let style = getComputedStyle(icon);
+    icon.color = style.color;
 
-    let { color, fontFamily } = style;
+    let xml = new XMLSerializer().serializeToString(icon);
+    let svg64 = btoa(xml);
+    let b64Start = 'data:image/svg+xml;base64,';
+    let image64 = b64Start + svg64;
 
-    ctx.font = `${size - 1.5}px ${fontFamily}`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
+    let imgElement = document.createElement('img');
+    imgElement.src = image64;
 
-    let diameter = ctx.measureText(content).width;
-
-    // circle to make sure the icon is visible
-    ctx.fillStyle = '#ffffff';
-    ctx.beginPath();
-    ctx.arc(size/2, size/2 + 1, diameter / 2, 0, Math.PI * 2, true);
-    ctx.fill();
-
-    // draw the icon
-    ctx.fillStyle = color;
-    ctx.fillText(content, size/2 - 0.5, size/2);
+    ctx.drawImage(imgElement, 0, 0, size, size)
 
     return true;
   };

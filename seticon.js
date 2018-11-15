@@ -21,12 +21,12 @@
     }
   };
 
-  const createForBuildPage = () => {
+  const createImageFromSelector = (selector) => {
     const ctx = canvas.getContext('2d');
     ctx.imageSmoothingEnabled = true;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    let icon = document.querySelector('.result-status svg');
+    let icon = document.querySelector(selector);
 
     let style = getComputedStyle(icon);
     icon.color = style.color;
@@ -44,41 +44,6 @@
     return true;
   };
 
-  const createForReleasePage = () => {
-    const ctx = canvas.getContext('2d');
-    ctx.imageSmoothingEnabled = true;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    let icon = document.querySelector('.cd-environment-status-badge i[role="presentation"]');
-
-    if (icon === null) return false;
-
-    let content = getComputedStyle(icon, ':before').content.replace(/"/g, '');
-    let { color, fontFamily } = getComputedStyle(icon);
-    let { backgroundColor } = getComputedStyle(icon.parentElement);
-
-    ctx.font = `${size - 7}px ${fontFamily}`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-
-    // circle to make sure the icon is visible
-    ctx.fillStyle = '#ffffff';
-    ctx.beginPath();
-    ctx.arc(size/2, size/2 + 1, (size - 1) / 2, 0, Math.PI * 2, true);
-    ctx.fill();
-
-    // draw the icon
-    ctx.fillStyle = backgroundColor;
-    ctx.beginPath();
-    ctx.arc(size/2, size/2, (size - 1) / 2, 0, Math.PI * 2, true);
-    ctx.fill();
-
-    ctx.fillStyle = color;
-    ctx.fillText(content, size/2 + .5, size/2);
-
-    return true;
-  };
-
   const originalLinkHref = getLinkElement().href;
 
   setInterval(() => {
@@ -87,9 +52,9 @@
     var success = false;
 
     if (query.indexOf('buildid') !== -1) {
-      success = createForBuildPage();
+      success = createImageFromSelector('.result-status svg');
     } else if (query.indexOf('releaseid') !== -1) {
-      success = createForReleasePage();
+      success = createImageFromSelector('.cd-environment-status-badge svg');
     }
 
     if (!success) {

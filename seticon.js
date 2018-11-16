@@ -29,7 +29,7 @@
     let icon = document.querySelector(selector);
 
     let style = getComputedStyle(icon);
-    icon.color = style.color;
+    icon.setAttribute('fill', style.color);
 
     let xml = new XMLSerializer().serializeToString(icon);
     let svg64 = btoa(xml);

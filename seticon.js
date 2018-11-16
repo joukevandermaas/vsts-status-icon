@@ -52,7 +52,7 @@
     var success = false;
 
     if (query.indexOf('buildid') !== -1) {
-      success = createImageFromSelector('.result-status svg');
+      success = createImageFromSelector('.bh-status svg');
     } else if (query.indexOf('releaseid') !== -1) {
       success = createImageFromSelector('.cd-environment-status-badge svg');
     }

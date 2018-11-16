@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Status badge for Azure Devops Pipelines",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Sets the status icon as the favicon when you are on a Azure Devops Pipelines build or release page.",
 
   "content_scripts": [{

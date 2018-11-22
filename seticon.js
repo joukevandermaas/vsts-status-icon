@@ -39,7 +39,16 @@
     let imgElement = document.createElement('img');
     imgElement.src = image64;
 
-    ctx.drawImage(imgElement, 0, 0, size, size)
+    var centerX = size / 2;
+    var centerY = size / 2;
+    var radius = size / 2;
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+
+    ctx.drawImage(imgElement, .5, .5, size - 1, size - 1)
 
     return true;
   };

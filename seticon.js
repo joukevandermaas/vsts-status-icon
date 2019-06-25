@@ -28,6 +28,8 @@
 
     let icon = document.querySelector(selector);
 
+    if (!icon) return false;
+
     let style = getComputedStyle(icon);
     icon.setAttribute('fill', style.color);
 
@@ -45,10 +47,10 @@
 
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'rgba(255, 255, 255, 127)';
     ctx.fill();
 
-    ctx.drawImage(imgElement, .5, .5, size - 1, size - 1)
+    ctx.drawImage(imgElement, 1, 1, size - 2, size - 2)
 
     return true;
   };
@@ -61,7 +63,8 @@
     var success = false;
 
     if (query.indexOf('buildid') !== -1) {
-      success = createImageFromSelector('.bh-status svg');
+      success = createImageFromSelector('.job-header svg.bolt-status');
+      success = success || createImageFromSelector('.bolt-header svg.bolt-status');
     } else if (query.indexOf('releaseid') !== -1) {
       success = createImageFromSelector('.cd-environment-status-badge svg');
     }
